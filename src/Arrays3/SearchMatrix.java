@@ -1,4 +1,4 @@
-package Arrays2;
+package Arrays3;
 
 public class SearchMatrix {
     static void main() {
