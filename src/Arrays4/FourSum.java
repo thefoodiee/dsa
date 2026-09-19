@@ -30,8 +30,8 @@ public class FourSum {
 
                         k++;
                         l--;
-                        while(k<arr.length && arr[k] == arr[k-1])k++;
-                        while(l<arr.length && arr[l] == arr[l-1])l--;
+                        while(k<l && arr[k] == arr[k-1])k++;
+                        while(k<l && arr[l] == arr[l-1])l--;
                     }
                 }
             }
