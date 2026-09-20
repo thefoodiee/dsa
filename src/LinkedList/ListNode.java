@@ -3,20 +3,20 @@ package LinkedList;
 import java.util.*;
 
 public class ListNode {
-    int val;
-    ListNode next;
+    public int val;
+    public ListNode next;
 
     ListNode(int val) {
         this.val = val;
         this.next = null;
     }
 
-    ListNode(int val, ListNode next) {
+    public ListNode(int val, ListNode next) {
         this.val = val;
         this.next = next;
     }
 
-    static ListNode fromArray(int[] arr) {
+    public static ListNode fromArray(int[] arr) {
         if (arr == null || arr.length == 0) {
             return null;
         }
@@ -32,7 +32,7 @@ public class ListNode {
         return dummy.next;
     }
 
-    static void print(ListNode head) {
+    public static void print(ListNode head) {
         ListNode curr = head;
 
         while (curr != null) {
@@ -48,7 +48,7 @@ public class ListNode {
         System.out.println();
     }
 
-    static int length(ListNode head) {
+    public static int length(ListNode head) {
         int count = 0;
 
         while (head != null) {
@@ -59,7 +59,7 @@ public class ListNode {
         return count;
     }
 
-    static int[] toArray(ListNode head) {
+    public static int[] toArray(ListNode head) {
         ArrayList<Integer> list = new ArrayList<>();
 
         while (head != null) {
