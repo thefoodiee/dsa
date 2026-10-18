@@ -5,28 +5,40 @@ import java.util.List;
 
 public class Permutations {
     static void main() {
-        System.out.println(perm(
-                new int[]{1,2,3},
-                new ArrayList<>(),
-                new ArrayList<>()
-        ));
+        boolean[] used = new boolean[3];
+        System.out.println(
+                perm(
+                        new int[]{1,2,3},
+                        new boolean[3],
+                        0,
+                        new ArrayList<>(),
+                        new ArrayList<>()
+                )
+        );
     }
-    static List<List<Integer>> perm(int[] arr, ArrayList<Integer> curr, List<List<Integer>> ans){
-        if(curr.size() == arr.length){
+
+    static List<List<Integer>> perm(
+            int[] arr,
+            boolean[] used,
+            int ptr,
+            List<List<Integer>> ans,
+            ArrayList<Integer> curr
+    ){
+        if(ptr >= arr.length){
             ans.add(new ArrayList<>(curr));
             return ans;
         }
 
-        for(int j = 0; j<arr.length; j++){
-            if(curr.contains(arr[j])) continue;
+        for(int i = 0; i<arr.length; i++){
+            if(used[i]) continue;
+            curr.add(arr[i]);
+            used[i] = true;
 
-            curr.add(arr[j]);
-
-            perm(arr, curr, ans);
+            perm(arr, used, ptr+1, ans, curr);
 
             curr.removeLast();
+            used[i] = false;
         }
-
         return ans;
     }
 }
