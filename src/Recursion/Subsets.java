@@ -5,7 +5,12 @@ import java.util.List;
 
 public class Subsets {
     static void main() {
-        System.out.println(subsets(new int[]{1,2,3}, new ArrayList<>(), new ArrayList<>(), 0));
+        System.out.println(subsets(
+                new int[]{1,2,3},
+                new ArrayList<>(),
+                new ArrayList<>(),
+                0)
+        );
     }
     static List<List<Integer>> subsets(int[] arr, ArrayList<Integer> subset, List<List<Integer>> ans, int i){
         if(i == arr.length){
