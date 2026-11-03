@@ -33,41 +33,29 @@ public class NextGreaterElement {
     }
 
     static void ngeOptimal(int[] arr1, int[] arr2){
+        // store arr1[i] -> i
         HashMap<Integer, Integer> map = new HashMap<>();
         for(int i = 0; i<arr1.length; i++){
             map.put(arr1[i], i);
         }
 
-        int[] ans = new int[arr1.length];
-        Arrays.fill(ans, -1);
+        //initialize ans arr
+        int[] res = new int[arr1.length];
+        Arrays.fill(res, -1);
 
+        //monotonic stack
         Stack<Integer> stack = new Stack<>();
+        for(int i = 0; i<arr2.length; i++){
+            while(!stack.isEmpty() && arr2[i] > stack.peek()){
+                int top = stack.pop();
+                res[map.get(top)] = arr2[i];
+            }
 
-        for(int i = arr2.length - 1; i>=0; i--){
-            if(stack.isEmpty()){
+            //only add elements of array 1 in stack
+            if(map.containsKey(arr2[i])){
                 stack.push(arr2[i]);
-                ans[i] = -1;
-                continue;
             }
-
-            if(stack.peek() > arr2[i]){
-                ans[i] = stack.peek();
-                stack.push(arr2[i]);
-                continue;
-            }
-
-            while(stack.peek() <= arr2[i] && !stack.isEmpty()){
-                stack.pop();
-            }
-
-            if(stack.isEmpty()){
-                ans[i] = -1;
-            }
-            else{
-                ans[i] = stack.peek();
-            }
-            stack.push(arr2[i]);
         }
-        System.out.println(Arrays.toString(ans));
+        System.out.println(Arrays.toString(res));
     }
 }
