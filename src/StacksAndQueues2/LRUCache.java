@@ -24,11 +24,10 @@ class Node {
 }
 
 class Cache{
-    Map<Integer, Node> map = new HashMap<>();
     int capacity;
-    Node head = new Node(-1, -1);
-    Node tail = new Node(-1, -1);
-
+    HashMap<Integer, Node> map = new HashMap<>();
+    Node head = new Node(-1,-1);
+    Node tail = new Node(-1,-1);
     Cache(int capacity){
         this.capacity = capacity;
         head.next = tail;
@@ -36,27 +35,25 @@ class Cache{
     }
 
     void remove(Node node){
-        node.next.prev = node.prev;
         node.prev.next = node.next;
+        node.next.prev = node.prev;
     }
 
-    void insert(Node node){
+    void insertAtHead(Node node){
         node.next = head.next;
-        node.prev = head;
         head.next.prev = node;
         head.next = node;
+        node.prev = head;
     }
 
     int get(int key){
-        if(!map.containsKey(key)){
-            return -1;
+        if(map.containsKey(key)){
+            Node node = map.get(key);
+            remove(node);
+            insertAtHead(node);
+            return node.val;
         }
-        Node node = map.get(key);
-
-        remove(node);
-        insert(node);
-
-        return node.val;
+        return -1;
     }
 
     void put(int key, int value){
@@ -64,7 +61,7 @@ class Cache{
             Node node = map.get(key);
             node.val = value;
             remove(node);
-            insert(node);
+            insertAtHead(node);
             return;
         }
 
@@ -76,6 +73,6 @@ class Cache{
 
         Node node = new Node(key, value);
         map.put(key, node);
-        insert(node);
+        insertAtHead(node);
     }
 }
